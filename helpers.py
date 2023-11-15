@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import re
-from typing import Union
+from typing import Optional, List
 import networkx as nx
 import statsmodels.formula.api as smf
 from nltk.corpus import stopwords
@@ -56,7 +56,7 @@ def get_common_words(words: list) -> pd.DataFrame:
     
     return words_common
 
-def classify_product(title: str, keywords: dict) -> Union[str, np.nan]:
+def classify_product(title: str, keywords: dict) -> Optional[str]:
     """
     Classifies a product based on the presence of keywords in its title.
 
@@ -76,7 +76,23 @@ def classify_product(title: str, keywords: dict) -> Union[str, np.nan]:
     else:
         return np.nan
     
-def balance_data(df,treat_column,continuous_features=[],categorical_features=[],balance_on=None):
+def balance_data(df: pd.DataFrame,
+                 treat_column: str,
+                 continuous_features: List[str] = [],
+                 categorical_features: List[str] = []) -> List[int]:
+    """
+    Balances a dataset based on propensity scores for treatment and control groups.
+
+    Parameters:
+    - df (pd.DataFrame): The input DataFrame containing the original data.
+    - treat_column (str): The column indicating treatment assignment (1 for treatment, 0 for control).
+    - continuous_features (List[str]): List of names of continuous features to be standardized.
+    - categorical_features (List[str]): List of names of categorical features for logistic regression.
+
+    Returns:
+    - List[int]: List of indices of matched instances in the original DataFrame.
+    """
+    
     # Copy the df to avoid modifying the original dataframe
     data = df[[treat_column] + continuous_features + categorical_features]
     
