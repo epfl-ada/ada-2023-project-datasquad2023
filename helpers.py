@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 import re
+from typing import Union
+import networkx as nx
+import statsmodels.formula.api as smf
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 # nltk.download('stopwords')
@@ -36,7 +39,7 @@ def clean_text(text_data: str) -> list:
 
 def get_common_words(words: list) -> pd.DataFrame:
     """
-    Get the most common words and their occurrences from a list of words.
+    Get the most 100 common words and their occurrences from a list of words.
 
     Parameters:
     - words (list): A list of words.
@@ -52,3 +55,71 @@ def get_common_words(words: list) -> pd.DataFrame:
     words_common = words_unique.sort_values(by='occurance',ascending=False).iloc[:100]
     
     return words_common
+
+def classify_product(title: str, keywords: dict) -> Union[str, np.nan]:
+    """
+    Classifies a product based on the presence of keywords in its title.
+
+    Parameters:
+    - title (str): The title of the product to be classified.
+    - keywords (dict): A dictionary where keys represent product categories, and values are lists of keywords associated with each category.
+
+    Returns:
+    - str or np.nan: The category of the product with the highest keyword match. Returns np.nan if no keywords are found.
+    """
+    
+    count = {}
+    for keyword in keywords:
+        count[keyword] = sum([word in title for word in keywords[keyword]])
+    if not all(value == 0 for value in count.values()):
+        return max(count, key=count.get)
+    else:
+        return np.nan
+    
+def balance_data(df,treat_column,continuous_features=[],categorical_features=[],balance_on=None):
+    # Copy the df to avoid modifying the original dataframe
+    data = df[[treat_column] + continuous_features + categorical_features]
+    
+    # Standardize the continuous features
+    for column in continuous_features:
+        data[column] = (data[column] - data[column].mean())/data[column].std()
+
+    continuous_formula = ' + '.join(continuous_features)
+    categorical_formula = ' + '.join([f'C({col})' for col in categorical_features])
+    
+    if (len(categorical_formula) != 0) & (len(continuous_formula) != 0):
+        formula = f"{treat_column} ~ {continuous_formula} + {categorical_formula}"
+    elif len(continuous_formula) != 0:
+        formula = f"{treat_column} ~ {continuous_formula}"
+    else:
+        formula = f"{treat_column} ~ {categorical_formula}"
+
+    mod = smf.logit(formula=formula, data=data)
+
+    res = mod.fit()
+
+    # Extract the estimated propensity scores
+    data['Propensity_score'] = res.predict()
+
+    # Calculate similarity
+    def get_similarity(propensity_score1, propensity_score2):
+        '''Calculate similarity for instances with given propensity scores'''
+        return 1-np.abs(propensity_score1-propensity_score2)
+
+    # Balance the dataset 
+    treatment_df = data[data[treat_column] == 1]
+    control_df = data[data[treat_column] == 0]
+
+    # Create Graph
+    G = nx.Graph()
+
+    for control_id, control_row in control_df.iterrows():
+        for treatment_id, treatment_row in treatment_df.iterrows():
+
+            similarity = get_similarity(control_row['Propensity_score'], treatment_row['Propensity_score'])
+            G.add_weighted_edges_from([(control_id, treatment_id, similarity)])
+
+    matching = nx.max_weight_matching(G)
+    matched = [i[0] for i in list(matching)] + [i[1] for i in list(matching)]
+    
+    return matched
