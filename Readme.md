@@ -36,7 +36,7 @@ Then, we classify the channels considering that if a channel has at least one vi
 We compare the growth of channels (measured with the number of views) for treat and control channels to see if channels that talks about a release have a higher growth than he ones which do not. To do this comparaison, we use the time series data and focus on a period that goes from one month before the release till one month after.
 Then, we do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the counfounders.
 We first, focus on 1 event "iphone x"
-### Proposed timeline
+## Proposed timeline
 Step 1 to 5: **Deadline Milestone 2 17.11.2023**
 
 *01.12.2023: Deadline Homework 2*
@@ -49,7 +49,7 @@ Step 8: 15.12.2023
 
 Step 9: **Deadline Milestone 3 22.12.2023**
 
-### Organization within team
+## Organization within the team
 Salma:  Continue with question 3a, generalize to the to the other events and do the causal analysis. Do 3b : from now till 1st December
 Writing the report/data story + website (presentation of data story ): from 1st Decembre till 22 Decembre
 
