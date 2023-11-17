@@ -4,8 +4,12 @@ import re
 from typing import Optional, List
 import networkx as nx
 import statsmodels.formula.api as smf
+import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from nltk.tokenize import RegexpTokenizer
+import gensim
+from gensim import corpora, models
 # nltk.download('stopwords')
 # nltk.download('wordnet')
 
@@ -139,3 +143,155 @@ def balance_data(df: pd.DataFrame,
     matched = [i[0] for i in list(matching)] + [i[1] for i in list(matching)]
     
     return matched
+
+def score_per_day(df:pd.DataFrame, item: str, release_date: pd.Timestamp) -> pd.DataFrame:
+    """
+    Given a product name, fetches the df for videos with titles containing the name of the product
+    that were uploaded within 6 months of the product's release date and computes the total view count,
+    total likes total dislikes and number of videos per day.
+    :param item: product name
+    :param df: dataframe of videos with titles containing the name of the product
+    :return: dataframe of total view count, total likes total dislikes and number of videos per day
+    """
+
+    # filter out titles that do not contain the product name
+    df = df[df["title"].str.lower().str.contains(item)]
+    
+    # convert 'view_count' to int
+    df["view_count"] = df["view_count"].astype(int)
+
+    # convert 'upload_date' to datetime
+    df["upload_date"] = pd.to_datetime(df["upload_date"])
+    df["upload_date"] = df["upload_date"].dt.date
+
+    # keep only rows that were uploaded within 3 months of the product's release date
+    df = df[(df["upload_date"] >= release_date - datetime.timedelta(days=90)) & (df["upload_date"] <= release_date + datetime.timedelta(days=90))]
+
+    # keep only 'view_count', 'upload_date', 'likes', 'dislikes', 'title'
+    df = df[["view_count", "upload_date", "like_count", "dislike_count", "title"]]
+
+    # group by 'upload_date'
+    df = df.groupby("upload_date")
+
+    # compute total view count, total like_count, total dislike_count and number of videos per day
+    df = df.agg({"view_count": "sum", "like_count": "sum", "dislike_count": "sum", "title": "count"})
+
+    return df
+
+def get_sum_views(df:pd.DataFrame) -> pd.DataFrame:
+    """
+    Calculates the sum of number of views per upload date from a DataFrame.
+
+    Parameters:
+    - df (pandas.DataFrame): The input DataFrame containing view count and upload date data.
+
+    Returns:
+    - pandas.DataFrame: A DataFrame with the sum of view counts per upload date.
+
+    The function extracts the 'view_count' and 'upload_date' columns from the input DataFrame,
+    converts the 'upload_date' to datetime format, and drops rows with missing or invalid values.
+    It then calculates the sum of view counts for each upload date and returns the result.
+    """
+    df_view = df[["view_count", "upload_date"]].copy()
+    df_view["upload_date"] = pd.to_datetime(df_view["upload_date"])
+    df_view = df_view.dropna(subset = ["view_count", "upload_date"])
+    df_view["view_count"] = df_view["view_count"].astype("int64")
+
+    # keep only 'view_count' and 'upload_date'
+    df_view = df_view.groupby("upload_date")[['view_count']].sum()
+    
+    return df_view
+
+def get_lda_topics(df:pd.DataFrame, num_topics:int, num_words:int) -> None:
+    """
+    Extracts topics using Latent Dirichlet Allocation (LDA) from a DataFrame of text data.
+
+    Parameters:
+    - df (pandas.DataFrame): The input DataFrame containing text data.
+    - num_topics (int): The number of topics to extract using LDA.
+    - num_words (int): The number of words to display for each topic.
+
+    Returns:
+    - gensim.models.ldamodel.LdaModel: The trained LDA model.
+
+    The function tokenizes, preprocesses, and lemmatizes the text data in the DataFrame.
+    It then builds a dictionary and corpus for LDA modeling and trains the LDA model.
+    Finally, it prints the top words for each topic.
+    """
+    # tokenize words
+    tokenizer = RegexpTokenizer(r'\w+')
+    df["tokens"] = df["title"].apply(tokenizer.tokenize)
+
+    # convert to lowercase
+    df["tokens"] = df["tokens"].apply(lambda x: [word.lower() for word in x])
+    
+    # remove stop words
+    stop_words = stopwords.words('english')
+    df["tokens"] = df["tokens"].apply(lambda x: [word for word in x if word not in stop_words])
+    
+    # lemmatize words
+    lemmatizer = WordNetLemmatizer()
+    df["tokens"] = df["tokens"].apply(lambda x: [lemmatizer.lemmatize(word) for word in x])
+    
+    # remove words that appear only once
+    all_tokens = sum(df["tokens"], [])
+    tokens_once = set(word for word in set(all_tokens) if all_tokens.count(word) == 1)
+    df["tokens"] = df["tokens"].apply(lambda x: [word for word in x if word not in tokens_once])
+
+    # remove the token 'iphone'
+    df["tokens"] = df["tokens"].apply(lambda x: [word for word in x if word != "iphone"])
+
+    # remove one character tokens
+    df["tokens"] = df["tokens"].apply(lambda x: [word for word in x if len(word) > 2])
+    
+    # create dictionary and corpus
+    dictionary = corpora.Dictionary(df["tokens"])
+    corpus = [dictionary.doc2bow(text) for text in df["tokens"]]
+    
+    # create LDA model
+    lda = gensim.models.ldamodel.LdaModel(corpus=corpus, id2word=dictionary, num_topics=num_topics, random_state=42)
+    
+    # print topics
+    topics = lda.show_topics(num_topics=3, num_words=10, formatted=False)
+    for topic_id, words in topics:
+        print(f"Topic {topic_id + 1}: {', '.join(word[0] for word in words)}")
+
+    # visualize topics
+    pyLDAvis.enable_notebook()
+    vis = pyLDAvis.gensim.prepare(lda, corpus, dictionary)
+
+def get_tf_idf_score(tf_idf_scores: dict, words: List[str]):
+    """
+    Given a dictionary of tf-idf scores and a list of words, compute the average tf-idf score for the list of words.
+    :param tf_idf_scores: dictionary of tf-idf scores
+    :param words: list of words
+    :return: average tf-idf score for the list of words
+    """
+    score = 0
+    for word in words:
+        score += tf_idf_scores.get(word, 0)
+
+    return score / len(words)
+
+def tf_idf(tokens: List[str]):
+    """
+    Given a list of tokens, compute the tf-idf coefficient for each token.
+    :param tokens: list of titles split into tokens
+    :return: dictionary of tf-idf coefficients
+    """
+    # create dictionary
+    dictionary = corpora.Dictionary(tokens)
+    
+    # create corpus
+    corpus = [dictionary.doc2bow(text) for text in tokens]
+    
+    # create tf-idf model
+    tfidf = models.TfidfModel(corpus)
+    
+    # get tf-idf coefficients
+    tfidf_weights = {}
+    for doc in corpus:
+        for id, weight in tfidf[doc]:
+            tfidf_weights[dictionary[id]] = weight
+    
+    return tfidf_weights
