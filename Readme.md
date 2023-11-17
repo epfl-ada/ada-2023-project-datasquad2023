@@ -40,11 +40,11 @@ The research questions that we would like to answer fall into 3 main topics as s
    
 ## Methods
 
-Salma:  3a: Identify the channels that talk about a release event to analyze their evolution in terms of the number of subscribers compared to those that do not talk about the event. First, we focus on 1 event. Then, we will generalize to the 5 others. From the title and tags of the videos, we classify them according to the presence of the "item" in this metadata - treat (if talks about the release - control if not). We focus on videos that have an upload date from the release till one month later.
-Then, we classify the channels considering that if a channel has at least one video that talks about the release, it is a treat channel. 
-We compare the growth of channels (measured with the number of views) for treat and control channels to see if channels that talk about a release have a higher growth than the ones that do not. To do this comparison, we use the time series data and focus on a period that goes from one month before the release till one month after.
-Then, we do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the confounders.
-We first, focus on 1 event "iphone x"
+Salma:  3a: Identify the channels that talk about a release event to analyze their evolution in terms of the number of subscribers compared to those that do not talk about the event. First, we focus on 1 event (the release of the iPhone x). Then, we will generalize to the 5 others. From the title and tags of the videos, we classify them according to the presence of the item "iphone x" in this metadata : treat if it talks about the release - control if not. We focus on videos that have an upload date from the release till one month later.
+Then, we classify the channels considering that if a channel has at least one video that talks about the release, then it is a treat channel. 
+We compare the growth of channels (measured with the number of subscribers) for treat and control channels to see if channels that talk about a release have a higher growth than the ones that do not. To do this comparison, we use the time series data and focus on a period that goes from 15 days before the release till 15 days after.
+Then, we will do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the potential confounders.
+
 ## Proposed timeline
 Step 1 to 5: **Deadline Milestone 2 17.11.2023**
 
