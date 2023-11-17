@@ -40,9 +40,10 @@ The research questions that we would like to answer fall into 3 main topics as s
    
 ## Methods
 ### Step 1: General preprocessing
+For our analysis, preprocessing includes filtering the Tech Review channels. We are doing it based on what percentageof the channels' videos are about tech review. To classify the tech review videos, howevere, we are using multiple techniques. The naive method is about finding what percentage of the words used in their title is widely used by the well-known Tech Review YouTubers, and classifying the video depending on this. We also want to try with the Bayesian classifier (as explained in the notebook) and other NLP methods in the next milestone.
 
 ### Step 2: Video length analysis
-We focused on a subset of videos (namely videos shorter than 20 minutes long) from the tech review channels (identified in the previous step). We first computed the average number of likes and dislikes per video, as well as the average duration of a video, over the years. We noticed they all linearly increased. Then, we computed the ratios $\frac{number\ of\ likes}{number\ of\ views}$ and $\frac{number\ of\ dislikes}{number\ of\ views}$ and calculated their pearson correlations with the average duration. We found a statistically significant (small p-value) positive correlation between the ratio $\frac{number\ of\ likes}{number\ of\ views}$ and the average duration but a statistically significant negative correaltion between the ratio $\frac{number\ of\ dislikes}{number\ of\ views}$ and the average duration. Moreover, we computed the moving average with a window size of 1000 We finally computed the ratio $\frac{number\ of\ likes}{number\ of\ dislikes}$ and plotted it across years and found that it was increasing. Note that, we smoothed the number of views and number of dislikes by adding a one to each of them, so that we avoid dividing by zero in our ratio computations while still taking into account those videos that performed poorly instead of discarding them.
+We focused on a subset of videos (namely videos shorter than 20 minutes long) from the tech review channels (identified in the previous step). We first computed the average number of likes and dislikes per video, as well as the average duration of a video, over the years. Then, we computed the ratios $\frac{number\ of\ likes}{number\ of\ views}$ and $\frac{number\ of\ dislikes}{number\ of\ views}$ and calculated their pearson correlations with the average duration. We found a statistically significant (small p-value) positive correlation between the ratio $\frac{number\ of\ likes}{number\ of\ views}$ and the average duration but a statistically significant negative correaltion between the ratio $\frac{number\ of\ dislikes}{number\ of\ views}$ and the average duration. Moreover, we computed the moving average with a window size of 1000 and finally, we computed the ratio $\frac{number\ of\ likes}{number\ of\ dislikes}$ and plotted it across years. Note that, we smoothed the number of views and number of dislikes by adding a one to each of them, so that we avoid dividing by zero in our ratio computations while still taking into account those videos that performed poorly instead of discarding them.
 
 ### Step 3: Upload frequency analysis
 First we tried naively to compute the frequency as $\frac{number\ of\ videos}{number\ of\ months}$. 
@@ -67,17 +68,15 @@ Note: more implementation details/explanations can be found in the notebook.
 |
 ├── 21.11.2023 - Continue exploring the dataset 
 │  
-├── 28.11.2023 - Perform sentiment analysis
-│  
 ├── 01.12.2023 - Homework 2 deadline
 │    
-├── 05.12.2023 - Perform final analysis
+├── 05.12.2023 - Non-naive preprocessing (classification)
 │  
-├── 12.12.2023 - Develop draft for data story
+├── 12.12.2023 - Causal analysis on events + Develop draft for data story
 │  
-├── 18.12.2023 - Finalize code implementations and visualizations
+├── 18.12.2023 - Sentiment analysis
 │  
-├── 21.12.2023 - Finalize data story
+├── 21.12.2023 - Finalize data story page design
 │  
 ├── 22.12.2023 - Milestone 3 deadline
 .
@@ -99,7 +98,7 @@ Note: more implementation details/explanations can be found in the notebook.
 <tbody>
   <tr>
     <td class="tg-0lax">@Salma</td>
-    <td class="tg-0lax">Work on question 3.1, generalize to the other events, and do the causal analysis.<br><br>Do 3.2.<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">(Step 4) Work more on question 3.1, by generalizing to other events, and do the causal analysis.<br><br>(Step 4) Do 3.2.<br><br>Help in writing the report/data story + website (presentation of data story)</td>
   </tr>
   <tr>
     <td class="tg-0lax">@Jakhongir</td>
@@ -107,7 +106,7 @@ Note: more implementation details/explanations can be found in the notebook.
   </tr>
   <tr>
     <td class="tg-0lax">@Zied</td>
-    <td class="tg-0lax">Work on the sentiment analysis topic. Do 2.1<br><br>Continue exploring the dataset.<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">(Step 5) Work on the sentiment analysis topic (Do 2.1)<br><br>(Step2) Continue exploring the dataset.<br><br>Help in writing the report/data story + website (presentation of data story)</td>
   </tr>
   <tr>
     <td class="tg-0lax">@Ali</td>
@@ -115,7 +114,7 @@ Note: more implementation details/explanations can be found in the notebook.
   </tr>
   <tr>
     <td class="tg-0lax">@Othmane</td>
-    <td class="tg-0lax">Work on the upload frequency: objective is to generalise the study to all youtubers instead of 4<br><br>Run a causal study on the upload frequency: split youtubers into different chunks as it has been done in the beginning of the frequency analysis<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">(Step 3) Work on the upload frequency: objective is to generalise the study to all youtubers instead of 4<br><br>(Step 3) Run a causal study on the upload frequency: split youtubers into different chunks as it has been done in the beginning of the frequency analysis<br><br>Help in writing the report/data story + website (presentation of data story)</td>
   </tr>
 </tbody>
 </table>
