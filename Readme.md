@@ -9,23 +9,29 @@ The research questions that we would like to answer fall into 3 main topics as s
 
 1. General characteristics of successful tech review channels
      For this topic, we would like to answer the following questions: 
-       1. Relationship between the length of a video and its success (how did it change over the years)? 
+       1. Relationship between the length of a video and its success (how did it change over the years)?
+   
        2. What should the upload frequency be?
+   
        3. What is the right range of products to review (broad and narrow/niche product ranges)?
+   
        4. Which tech review categories are the most popular (smart phone, laptop, …)?
       
-2. Sentiment analysis
+3. Sentiment analysis
      For this topic, we would like to answer the following questions:
        1. Compare positive/negative titles to see which one is attracting more views?
+   
        2. Further sentiment analysis might be done on: 
         - length of title
         - question like/non question like titles
         - lower/capital case letters
    
-3. Influence of big tech events (release) on channels' growth?
+5. Influence of big tech events (release) on channels' growth?
      For this topic, we would like to answer the following questions:
        1. How do big tech events affect the existing channels growth?
+   
        2. How quickly can the new channels (that start with the first video about the “big” event) grow?
+   
        3. What is the best time delay for releasing a review video after a tech product launch event?
   
    
