@@ -39,25 +39,28 @@ The research questions that we would like to answer fall into 3 main topics as s
   
    
 ## Methods
-### Step 1:
-### Step 2:
-### Step 3:
-### Step 4:
-### Step 5:
-### Step 6:
-Identify the channels that talk about a release event to analyze their evolution in terms of the number of subscribers compared to those that do not talk about the event. First, we focus on 1 event (the release of the iPhone X). Then, we will generalize to 5 others. From the title and tags of the videos, we classify them according to the presence of the item "iphone X" in this metadata : treat if it talks about the release - control if not. We focus on videos that have an upload date from the release till one month later.
+### Step 1: General preprocessing
+
+### Step 2: Video length analysis
+In this section, 
+
+### Step 3: Upload frequency analysis
+### Step 4: Influence of big tech events on channel growth
+We identified the channels that talk about a release event to analyze their evolution in terms of the number of subscribers compared to those that do not talk about the event. First, we focus on 1 event (the release of the iPhone X). Then, we will generalize to 5 others. From the title and tags of the videos, we classify them according to the presence of the item "iPhone X" in this metadata : treat if it talks about the release - control if not. We focus on videos that have an upload date from the release till one month later.
 Then, we classify the channels considering that if a channel has at least one video that talks about the release, then it is a treat channel. 
 We compare the growth of channels (measured in terms of the number of subscribers) for treat and control channels to see if channels that talk about a release have a higher growth than the ones that do not. To do this comparison, we use the time series data and focus on a period that goes from 15 days before the release till 15 days after.
 Then, we will do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the potential confounders.
+### Step 5: Sentiment analysis
+
 
 ## Proposed timeline
 ```
 .
 |── 17.11.2023 - Milestone 2 deadline
 |
-├── 21.11.2023 - Perform sentiment analysis
+├── 21.11.2023 - Continue exploring the dataset 
 │  
-├── 23.11.2023 - Continue exploring the dataset to get more insights
+├── 28.11.2023 - Perform sentiment analysis
 │  
 ├── 01.12.2023 - Homework 2 deadline
 │    
@@ -93,7 +96,7 @@ Then, we will do an observational study (causal analysis) with the outcome being
   </tr>
   <tr>
     <td class="tg-0lax">@Jakhongir</td>
-    <td class="tg-0lax">...<br><br>Develop the web interface</td>
+    <td class="tg-0lax">...<br><br>Help in writing the report/data story + website (presentation of data story)</td>
   </tr>
   <tr>
     <td class="tg-0lax">@Zied</td>
@@ -105,7 +108,7 @@ Then, we will do an observational study (causal analysis) with the outcome being
   </tr>
   <tr>
     <td class="tg-0lax">@Othmane</td>
-    <td class="tg-0lax">...<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">Work on the upload frequency: objective is to generalise the study to all youtubers instead of 4<br><br>Run a causal study on the upload frequency: split youtubers into different chunks as it has been done in the beginning of the frequency analysis<br><br>Help in writing the report/data story + website (presentation of data story)</td>
   </tr>
 </tbody>
 </table>
