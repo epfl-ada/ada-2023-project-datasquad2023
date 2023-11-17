@@ -31,10 +31,10 @@ The research questions that we would like to answer fall into 3 main topics as s
    
 ## Methods
 
-Salma: 3.a : Identify the channels that talk about a release event to analyse their evolution in terms of the number of subscribers compared to those which do not talk about the event. First, we focus on 1 event. Then, we will generalize to the 5 others. From the title and tags of the videos, we classify them according to the presence of the "item" in this metadata - treat (if talks about the relelase - control if not). We focus on videos that have an upload date from the release till one month after.
-Then, we classify the channels considering that if a channel has at least one video that talk about the release, it is treat channel. 
-We compare the growth of channels (measured with the number of views) for treat and control channels to see if channels that talks about a release have a higher growth than he ones which do not. To do this comparaison, we use the time series data and focus on a period that goes from one month before the release till one month after.
-Then, we do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the counfounders.
+Salma: 3.a: Identify the channels that talk about a release event to analyze their evolution in terms of the number of subscribers compared to those that do not talk about the event. First, we focus on 1 event. Then, we will generalize to the 5 others. From the title and tags of the videos, we classify them according to the presence of the "item" in this metadata - treat (if talks about the release - control if not). We focus on videos that have an upload date from the release till one month later.
+Then, we classify the channels considering that if a channel has at least one video that talks about the release, it is a treat channel. 
+We compare the growth of channels (measured with the number of views) for treat and control channels to see if channels that talk about a release have a higher growth than the ones that do not. To do this comparison, we use the time series data and focus on a period that goes from one month before the release till one month after.
+Then, we do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the confounders.
 We first, focus on 1 event "iphone x"
 ## Proposed timeline
 Step 1 to 5: **Deadline Milestone 2 17.11.2023**
