@@ -16,19 +16,19 @@ The research questions that we would like to answer fall into 3 main topics as s
    
        3. What is the right range of products to review (broad and narrow/niche product ranges)?
    
-       4. Which tech review categories are the most popular (smart phone, laptop, …)?
+       4. Which tech review categories are the most popular (smartphone, laptop, …)?
       
-3. Sentiment analysis
+2. Sentiment analysis
      For this topic, we would like to answer the following questions:
    
-       1. Compare positive/negative titles to see which one is attracting more views?
+       1. Compare positive/negative titles to see which one is attracting more views.
    
        2. Further sentiment analysis might be done on: 
         - length of title
-        - question like/non question like titles
+        - question-like/non-question like titles
         - lower/capital case letters
    
-5. Influence of big tech events (release) on channels' growth?
+3. Influence of big tech events (release) on channels' growth?
      For this topic, we would like to answer the following questions:
    
        1. How do big tech events affect the existing channels growth?
@@ -39,27 +39,73 @@ The research questions that we would like to answer fall into 3 main topics as s
   
    
 ## Methods
+### Step 1:
+### Step 2:
+### Step 3:
+### Step 4:
+### Step 5:
+### Step 6:
+Identify the channels that talk about a release event to analyze their evolution in terms of the number of subscribers compared to those that do not talk about the event. First, we focus on 1 event (the release of the iPhone X). Then, we will generalize to 5 others. From the title and tags of the videos, we classify them according to the presence of the item "iphone X" in this metadata : treat if it talks about the release - control if not. We focus on videos that have an upload date from the release till one month later.
+Then, we classify the channels considering that if a channel has at least one video that talks about the release, then it is a treat channel. 
+We compare the growth of channels (measured in terms of the number of subscribers) for treat and control channels to see if channels that talk about a release have a higher growth than the ones that do not. To do this comparison, we use the time series data and focus on a period that goes from 15 days before the release till 15 days after.
+Then, we will do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the potential confounders.
 
-Salma: 3.a: Identify the channels that talk about a release event to analyze their evolution in terms of the number of subscribers compared to those that do not talk about the event. First, we focus on 1 event. Then, we will generalize to the 5 others. From the title and tags of the videos, we classify them according to the presence of the "item" in this metadata - treat (if talks about the release - control if not). We focus on videos that have an upload date from the release till one month later.
-Then, we classify the channels considering that if a channel has at least one video that talks about the release, it is a treat channel. 
-We compare the growth of channels (measured with the number of views) for treat and control channels to see if channels that talk about a release have a higher growth than the ones that do not. To do this comparison, we use the time series data and focus on a period that goes from one month before the release till one month after.
-Then, we do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the confounders.
-We first, focus on 1 event "iphone x"
 ## Proposed timeline
-Step 1 to 5: **Deadline Milestone 2 17.11.2023**
-
-*01.12.2023: Deadline Homework 2*
-
-Step 6: 08.12.2023
-
-Step 7, 8: 15.12.2023
-
-Step 8: 15.12.2023
-
-Step 9: **Deadline Milestone 3 22.12.2023**
+```
+.
+|── 17.11.2023 - Milestone 2 deadline
+|
+├── 21.11.2023 - Perform sentiment analysis
+│  
+├── 23.11.2023 - Continue exploring the dataset to get more insights
+│  
+├── 01.12.2023 - Homework 2 deadline
+│    
+├── 05.12.2023 - Perform final analysis
+│  
+├── 12.12.2023 - Develop draft for data story
+│  
+├── 18.12.2023 - Finalize code implementations and visualizations
+│  
+├── 21.12.2023 - Finalize data story
+│  
+├── 22.12.2023 - Milestone 3 deadline
+.
+```
 
 ## Organization within the team
-Salma:  Continue with question 3a, generalize to the to the other events and do the causal analysis. Do 3b : from now till 1st December
-Writing the report/data story + website (presentation of data story ): from 1st Decembre till 22 Decembre
 
-Jackongir: Step ...
+<table class="tg" style="undefined;table-layout: fixed; width: 342px">
+<colgroup>
+<col style="width: 164px">
+<col style="width: 178px">
+</colgroup>
+<thead>
+  <tr>
+    <th class="tg-0lax"></th>
+    <th class="tg-0lax">Tasks</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax">@Salma</td>
+    <td class="tg-0lax">Work on question 3.1, generalize to the other events, and do the causal analysis.<br><br>Do 3.2.<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">@Jakhongir</td>
+    <td class="tg-0lax">...<br><br>Develop the web interface</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">@Zied</td>
+    <td class="tg-0lax">Work on the sentiment analysis topic. Do 2.1<br><br>Continue exploring the dataset.<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">@Ali</td>
+    <td class="tg-0lax">...<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">@Othmane</td>
+    <td class="tg-0lax">...<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+  </tr>
+</tbody>
+</table>
