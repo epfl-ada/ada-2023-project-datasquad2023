@@ -51,6 +51,7 @@ Then, we classify the channels considering that if a channel has at least one vi
 We compare the growth of channels (measured in terms of the number of subscribers) for treat and control channels to see if channels that talk about a release have a higher growth than the ones that do not. To do this comparison, we use the time series data and focus on a period that goes from 15 days before the release till 15 days after.
 Then, we will do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the potential confounders.
 
+### Future methods
 ### Step 5: Sentiment analysis
 In the section of the project, our aim is to study the titles of videos from tech YouTube channels to come up with well thought rules about not only subjects that could be discussed by a tech channel, but also how to write a title that would attract the most viewers.
 For instance, we would answer questions such as how should be the overall sentiment of the title, what should be the overall length, ...
