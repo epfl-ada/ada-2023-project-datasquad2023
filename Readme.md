@@ -59,7 +59,7 @@ Then, we will do an observational study (causal analysis) with the outcome being
 ### Step 5: Sentiment analysis
 
 
-Note: more implementation details/explanations can be found in the notebook.
+**Note: more implementation details/explanations can be found in the notebook.**
 
 ## Proposed timeline
 ```
