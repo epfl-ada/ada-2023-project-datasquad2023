@@ -5,11 +5,11 @@
 In the past few years, more and more people joined YouTube as content creators. Some of them managed to create a successful channel and others less so. We are interested in understanding why this happened (i.e. the reasons that “potentially” explain and led to the success of some channels over others). Based on an insightful data analysis conducted on the Youniverse dataset, we aim to formulate a guide, targeting new YouTubers/old YouTubers who would like to improve their channel in order to become more successful. Due to the large size of the dataset, we decided to focus on tech review channels.
 
 ## Research questions
-The research questions that we would like to answer fall into 3 main topics as shown below:
+The research questions that we would like to answer fall into 3 main topics as follows:
+(For each topic, we state the questions we would like to answer below it)
 
 1. General characteristics of successful tech review channels<br>
-     For this topic, we would like to answer the following questions:
-   
+
        1. Relationship between the length of a video and its success (how did it change over the years)?
    
        2. What should the upload frequency be?
@@ -19,7 +19,6 @@ The research questions that we would like to answer fall into 3 main topics as s
        4. Which tech review categories are the most popular (smartphone, laptop, …)?
       
 2. Sentiment analysis<br>
-     For this topic, we would like to answer the following questions:
    
        1. Compare positive/negative titles to see which one is attracting more views.
    
@@ -29,7 +28,6 @@ The research questions that we would like to answer fall into 3 main topics as s
         - lower/capital case letters
    
 3. Influence of big tech events (release) on channels' growth?<br>
-     For this topic, we would like to answer the following questions:
    
        1. How do big tech events affect the existing channels growth?
    
@@ -43,7 +41,7 @@ The research questions that we would like to answer fall into 3 main topics as s
 For our analysis, preprocessing includes filtering the Tech Review channels. We are doing it based on what percentage of the channels' videos are about tech review. To classify the tech review videos, however, we are using multiple techniques. The naive method is about finding what percentage of the words used in their title is widely used by the well-known Tech Review YouTubers, and classifying the video depending on this. We also want to try with the Bayesian classifier (as explained in the notebook) and other NLP methods in the next milestone.
 
 ### Step 2: Video length analysis
-We focused on a subset of videos (namely videos shorter than 20 minutes long) from the tech review channels (identified in the previous step). We first computed the average number of likes and dislikes per video, as well as the average duration of a video, over the years. Then, we computed the ratios $\frac{number\ of\ likes}{number\ of\ views}$ and $\frac{number\ of\ dislikes}{number\ of\ views}$ and calculated their pearson correlations with the average duration. The average duration had a statistically significant (small p-value) positive correlation with the ratio $\frac{number\ of\ likes}{number\ of\ views}$ but a statistically significant negative correaltion with the ratio $\frac{number\ of\ dislikes}{number\ of\ views}$. Moreover, we computed the moving average with a window size of 1000 and finally computed the ratio $\frac{number\ of\ likes}{number\ of\ dislikes}$ and plotted it across years. Note that we smoothed the number of views and number of dislikes by adding a one to each of them, so that we avoid dividing by zero in our ratio computations while still taking into account those videos that performed poorly instead of discarding them. We would like to run this analysis with videos that are larger than 20 minutes long and see whether we get oppsoite results to what we got with videos less than 20 minutes long.
+We focused on a subset of videos (videos shorter than 20 minutes long) from the tech review channels (identified in the previous step). We first computed the average number of likes and dislikes per video, as well as the average duration of a video, over the years. Then, we computed the ratios $\frac{number\ of\ likes}{number\ of\ views}$ and $\frac{number\ of\ dislikes}{number\ of\ views}$ and calculated their pearson correlations with the average duration. The average duration had a statistically significant (small p-value) positive correlation with the ratio $\frac{number\ of\ likes}{number\ of\ views}$ but a statistically significant negative correaltion with the ratio $\frac{number\ of\ dislikes}{number\ of\ views}$. Moreover, we computed the moving average with a window size of 1000 and finally computed the ratio $\frac{number\ of\ likes}{number\ of\ dislikes}$ and plotted it across years. Note that we smoothed the number of views and dislikes by adding one to each of them, so that we avoid dividing by zero in our ratio computations while still taking into account those videos that performed poorly instead of discarding them. We would like to run this analysis with videos that are larger than 20 minutes long and see whether we get oppsoite results to what we got with videos less than 20 minutes long.
 
 ### Step 3: Upload frequency analysis
 First we tried naively to compute the frequency as $\frac{number\ of\ videos}{number\ of\ months}$. 
@@ -105,7 +103,7 @@ For instance, we would answer questions such as how should be the overall sentim
   </tr>
   <tr>
     <td class="tg-0lax">@Jakhongir</td>
-    <td class="tg-0lax">...<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">(Step 1) Implement preprocessing with more advanced classification<br><br>(Step 5) Work on the sentiment analysis part.<br><br>Help in writing the report/data story + website (presentation of data story)</td>
   </tr>
   <tr>
     <td class="tg-0lax">@Zied</td>
@@ -113,7 +111,7 @@ For instance, we would answer questions such as how should be the overall sentim
   </tr>
   <tr>
     <td class="tg-0lax">@Ali</td>
-    <td class="tg-0lax">...<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">(Step 5) Work on the sentiment analysis part.<br><br> (Step 4) Do a more in depth and generalised analysis on the effect of product launch announcement on the YouTube platform and how we can leverage them to increase user interaction<br><br>Help in writing the report/data story + website (presentation of data story)</td>
   </tr>
   <tr>
     <td class="tg-0lax">@Othmane</td>
