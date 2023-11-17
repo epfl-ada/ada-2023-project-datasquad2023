@@ -7,7 +7,7 @@ In the past few years, more and more people joined YouTube as content creators. 
 ## Research questions
 The research questions that we would like to answer fall into 3 main topics as shown below:
 
-1. General characteristics of successful tech review channels
+1. General characteristics of successful tech review channels<br>
      For this topic, we would like to answer the following questions:
    
        1. Relationship between the length of a video and its success (how did it change over the years)?
@@ -18,7 +18,7 @@ The research questions that we would like to answer fall into 3 main topics as s
    
        4. Which tech review categories are the most popular (smartphone, laptop, …)?
       
-2. Sentiment analysis
+2. Sentiment analysis<br>
      For this topic, we would like to answer the following questions:
    
        1. Compare positive/negative titles to see which one is attracting more views.
@@ -28,7 +28,7 @@ The research questions that we would like to answer fall into 3 main topics as s
         - question-like/non-question like titles
         - lower/capital case letters
    
-3. Influence of big tech events (release) on channels' growth?
+3. Influence of big tech events (release) on channels' growth?<br>
      For this topic, we would like to answer the following questions:
    
        1. How do big tech events affect the existing channels growth?
@@ -57,6 +57,8 @@ Then, we classify the channels considering that if a channel has at least one vi
 We compare the growth of channels (measured in terms of the number of subscribers) for treat and control channels to see if channels that talk about a release have a higher growth than the ones that do not. To do this comparison, we use the time series data and focus on a period that goes from 15 days before the release till 15 days after.
 Then, we will do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the potential confounders.
 ### Step 5: Sentiment analysis
+In the section of the project, our aim is to study the titles of videos from tech YouTube channels to come up with well thought rules about not only subjects that could be discussed by a tech channel, but also how to write a title that would attract the most viewers.
+For instance, we would answer questions such as how should be the overall sentiment of the title, what should be the overall length …
 
 
 **Note: more implementation details/explanations can be found in the notebook.**
