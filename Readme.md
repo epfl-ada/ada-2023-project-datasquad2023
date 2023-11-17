@@ -20,12 +20,9 @@ The research questions that we would like to answer fall into 3 main topics as f
       
 2. Sentiment analysis<br>
    
-       1. Compare positive/negative titles to see which one is attracting more views.
+       1. What should be the overall length.
    
-       2. Further sentiment analysis might be done on: 
-        - length of title
-        - question-like/non-question like titles
-        - lower/capital case letters
+       2. How should be the overall sentiment of the title.
    
 3. Influence of big tech events (release) on channels' growth?<br>
    
@@ -33,7 +30,7 @@ The research questions that we would like to answer fall into 3 main topics as f
    
        2. How quickly can the new channels (that start with the first video about the “big” event) grow?
    
-       3. What is the best time delay for releasing a review video after a tech product launch event?
+       3. What is the best time for releasing a review video after a tech product launch event?
   
    
 ## Methods
@@ -44,20 +41,19 @@ For our analysis, preprocessing includes filtering the Tech Review channels. We 
 We focused on a subset of videos (videos shorter than 20 minutes long) from the tech review channels (identified in the previous step). We first computed the average number of likes and dislikes per video, as well as the average duration of a video, over the years. Then, we computed the ratios $\frac{number\ of\ likes}{number\ of\ views}$ and $\frac{number\ of\ dislikes}{number\ of\ views}$ and calculated their pearson correlations with the average duration. The average duration had a statistically significant (small p-value) positive correlation with the ratio $\frac{number\ of\ likes}{number\ of\ views}$ but a statistically significant negative correaltion with the ratio $\frac{number\ of\ dislikes}{number\ of\ views}$. Moreover, we computed the moving average with a window size of 1000 and finally computed the ratio $\frac{number\ of\ likes}{number\ of\ dislikes}$ and plotted it across years. Note that we smoothed the number of views and dislikes by adding one to each of them, so that we avoid dividing by zero in our ratio computations while still taking into account those videos that performed poorly instead of discarding them. We would like to run this analysis with videos that are larger than 20 minutes long and see whether we get oppsoite results to what we got with videos less than 20 minutes long.
 
 ### Step 3: Upload frequency analysis
-First we tried naively to compute the frequency as $\frac{number\ of\ videos}{number\ of\ months}$. 
-Then second thing we’ve done is to check what’s the average frequency for each category (in terms of number subscribers).
-Then we desgined a particular way of frequency : first putting number of days between video releases, and then putting $\frac{1}{number\ of\ days}$ (when number of days between videos is 0. We assumed that 2 videos are uploaded the same day and replaced 0 by 1/2).
-We then calculated the variance of this frequency (to check whether the upload is consistent or not). Aftewards, we compared the number of videos per month with the delta subs this month (computing correlation) and then by comparing $\frac{number\ of\ videos\ per \ month}{var(freq)}$ with delta subs we found a higher correlation, specially for smaller youtubers.
+We first calculated the macro average of time delay (in days) between 2 consequtive videos per channel, and saw its change rate versus number of subscribers. Aftewards, we compared the number of videos per month with the delta subscribers, computing the correlation. We can further design a particular way of frequency : first putting number of days between video releases, and then putting $\frac{1}{number\ of\ days}$. We then can calculate the variance of this frequency (to check whether the upload is consistent or not).
 
 ### Step 4: Influence of big tech events on channel growth
-We identified the channels that talk about a release event to analyze their evolution in terms of the number of subscribers compared to those that do not talk about the event. First, we focus on 1 event (the release of the iPhone X). Then, we will generalize to 5 others. From the title and tags of the videos, we classify them according to the presence of the item "iphone x" in this metadata : treat if it talks about the release - control if not. We focus on videos that have an upload date from the release till one month later.
+We analysed the reaction of viewers during the period of iPhone X, and saw the topics that are the most discussed in the videos about the iPhone X during these two periods.
+We can further continue it in the following method:
+We identifie the channels that talk about a release event to analyze their evolution in terms of the number of subscribers compared to those that do not talk about the event. First, we focus on 1 event (the release of the iPhone X). Then, we will generalize to 5 others. From the title and tags of the videos, we classify them according to the presence of the item "iphone x" in this metadata : treat if it talks about the release - control if not. We focus on videos that have an upload date from the release till one month later.
 Then, we classify the channels considering that if a channel has at least one video that talks about the release, then it is a treat channel. 
 We compare the growth of channels (measured in terms of the number of subscribers) for treat and control channels to see if channels that talk about a release have a higher growth than the ones that do not. To do this comparison, we use the time series data and focus on a period that goes from 15 days before the release till 15 days after.
 Then, we will do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the potential confounders.
 
 ### Step 5: Sentiment analysis
 In the section of the project, our aim is to study the titles of videos from tech YouTube channels to come up with well thought rules about not only subjects that could be discussed by a tech channel, but also how to write a title that would attract the most viewers.
-For instance, we would answer questions such as how should be the overall sentiment of the title, what should be the overall length …
+For instance, we would answer questions such as how should be the overall sentiment of the title, what should be the overall length, ...
 
 
 **Note: more implementation details/explanations can be found in the notebook.**
