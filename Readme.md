@@ -61,6 +61,6 @@ Step 9: **Deadline Milestone 3 22.12.2023**
 ## Organization within the team
 Salma:: from now till 1st December: continue with question 3a, generalize to the other events, and do the causal analysis. Do 3b.
 
-from 1st December till 22 December : writing the report/data story + website (presentation of data story )
+from 1st December till 22 December: writing the report/data story + website (presentation of data story )
 
 Jackongir: Step ...
