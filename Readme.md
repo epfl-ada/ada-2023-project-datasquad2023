@@ -8,7 +8,8 @@ In the past few years, more and more people joined YouTube as content creators. 
 The research questions that we would like to answer fall into 3 main topics as shown below:
 
 1. General characteristics of successful tech review channels
-     For this topic, we would like to answer the following questions: 
+     For this topic, we would like to answer the following questions:
+   
        1. Relationship between the length of a video and its success (how did it change over the years)?
    
        2. What should the upload frequency be?
@@ -19,6 +20,7 @@ The research questions that we would like to answer fall into 3 main topics as s
       
 3. Sentiment analysis
      For this topic, we would like to answer the following questions:
+   
        1. Compare positive/negative titles to see which one is attracting more views?
    
        2. Further sentiment analysis might be done on: 
@@ -28,6 +30,7 @@ The research questions that we would like to answer fall into 3 main topics as s
    
 5. Influence of big tech events (release) on channels' growth?
      For this topic, we would like to answer the following questions:
+   
        1. How do big tech events affect the existing channels growth?
    
        2. How quickly can the new channels (that start with the first video about the “big” event) grow?
