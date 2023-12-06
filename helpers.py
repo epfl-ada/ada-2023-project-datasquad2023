@@ -30,7 +30,7 @@ def clean_text(text_data: str) -> list:
     text_data = re.sub(r'[^a-z]', ' ', text_data)
 
     # Create a list of words
-    text_data = text_data.split()
+    text_data = nltk.word_tokenize(text_data)
 
     # Lemmatize the words
     wl = WordNetLemmatizer()
@@ -96,7 +96,7 @@ def balance_data(df: pd.DataFrame,
     Returns:
     - List[int]: List of indices of matched instances in the original DataFrame.
     """
-    
+    assert (len(continuous_features) != 0) | (len(categorical_features) != 0), 'no feature passed to be matched on'
     # Copy the df to avoid modifying the original dataframe
     data = df[[treat_column] + continuous_features + categorical_features]
     
