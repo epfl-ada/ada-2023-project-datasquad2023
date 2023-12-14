@@ -13,6 +13,33 @@ from gensim import corpora, models
 # nltk.download('stopwords')
 # nltk.download('wordnet')
 
+def find_in_name_and_tags(df: pd.DataFrame, item: str, release_date: pd.Timestamp) -> pd.DataFrame:
+    """
+    Filter a DataFrame based on a specified product in the title or tags column,
+    within a three-month window around a given release date.
+
+    Parameters:
+    - df (pandas.DataFrame): The DataFrame containing video information.
+    - item (str): The product to search for in the title or tags.
+    - release_date (pd.Timestamp): The release date around which to filter the DataFrame.
+
+    Returns:
+    - pandas.DataFrame: A filtered DataFrame with an additional column indicating the presence
+      (1) or absence (0) of the specified product in the title or tags.
+    """
+    df = df[df.title.notna()]
+    df["upload_date"] = pd.to_datetime(df["upload_date"])
+
+    df.loc[
+        ((df["title"].str.lower().str.contains(item)) | (df["tags"].str.lower().str.contains(item, na=False))) &
+        (df["upload_date"] > release_date - pd.DateOffset(months=3)) & 
+        (df["upload_date"] < release_date + pd.DateOffset(months=3)),
+        item] = 1 
+
+    df[item].fillna(0,inplace=True)
+
+    return df
+
 def clean_text(text_data: str) -> list:
     """
     Clean and preprocess text data.
