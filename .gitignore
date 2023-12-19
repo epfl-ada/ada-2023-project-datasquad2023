@@ -1,3 +1,6 @@
 
 *.jsonl
 .DS_Store
+*.tsv
+*.gz
+*.pyc
