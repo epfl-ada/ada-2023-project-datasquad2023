@@ -82,52 +82,50 @@ class DataExtractor():
         """
         # only keep videos with the topic in the title
         df = df.copy()
-        df = df[['title', 'channel_id', 'upload_date']]
-        df['title'] = df['title'].astype(str)
+
         if topic:
+            # keep only videos where one of the pre-release keywords is present in the title
             df = df[df['title'].str.contains('|'.join(topic), case=False)]
-
-        # if there is a column called channel, rename it to channel_id
-        if 'channel' in self.channel_data.columns:
-            self.channel_data = self.channel_data.rename(columns={'channel': 'channel_id'})
-        df = pd.merge(self.channel_data, df, how='inner', on='channel_id')
-        df = df[df['channel_id'].notnull()]
-
-        # keep only rows where upload date is between start and end
+        # convert datetime to datetime object
         df['upload_date'] = pd.to_datetime(df['upload_date'])
-        df = df[(df['upload_date'] >= datetime.datetime.strptime(start, '%d-%m-%Y')) & (df['upload_date'] <= datetime.datetime.strptime(end, '%d-%m-%Y'))]
+        # keep only rows that have datetime between 180 days before the release date and the release date
+        df = df[(df['upload_date'] > datetime.datetime.strptime(start, '%Y-%m-%d')) & (df['upload_date'] < datetime.datetime.strptime(end, '%Y-%m-%d'))]
 
+        # convert start and end to dates
+        start = datetime.datetime.strptime(start, '%Y-%m-%d')
+        end = datetime.datetime.strptime(end, '%Y-%m-%d')
 
+        # get the date equivalent of the start and end dates
+        start_date = start.date()
+        end_date = end.date()
 
-        # remove rows where 'upload_date' < 'datetime'
-        df = df[df['upload_date'] >= df['datetime']]
-        df = df[['datetime', 'delta_views', 'delta_subs', 'views', 'subs']]
+        product_channels = df['channel_id'].unique()
+        channels_df = self.channel_data.copy()
 
-        # convert datetime to date
-        df['datetime'] = pd.to_datetime(df['datetime']).dt.date
-        # group by datetime and channel_id and take the sum of all the columns
+        # keep only channels that published pre-release videos
+        channels_df = channels_df[channels_df['channel'].isin(product_channels)]
+        # convert datetime to datetime object and date format
+        channels_df['datetime'] = pd.to_datetime(channels_df['datetime'])
+        # keep only rows that have datetime between 180 days before the release date and the release date
+        channels_df = channels_df[(channels_df['datetime'] > start) & (channels_df['datetime'] < end)]
+        channels_df['datetime'] = channels_df['datetime'].dt.date
+        channels_df = channels_df.groupby('datetime').sum()
 
-        # remove rows having a nan in any of the columns
-        df = df.dropna()
+        channels_df['ratio_views'] = channels_df['delta_views'] / channels_df['views']
+        channels_df['ratio_subs'] = channels_df['delta_subs'] / channels_df['subs']
 
-        # take ratio of delta_views to views
-        df['ratio_views'] = df['delta_views'] / df['views']
+        # make a moving average of the ratio of views and subs
+        channels_df['ratio_views'] = channels_df['ratio_views'].rolling(window=10).mean()
+        channels_df['ratio_subs'] = channels_df['ratio_subs'].rolling(window=10).mean()
 
-        # take ratio of delta_subs to subs
-        df['ratio_subs'] = df['delta_subs'] / df['subs']
+        channels_df = channels_df[['ratio_views', 'ratio_subs']]
+        channels_df = channels_df.reset_index()
+        channels_df['datetime'] = pd.to_datetime(channels_df['datetime'])
+        channels_df = channels_df[['datetime', 'ratio_views', 'ratio_subs']]
+        # turn into dictionary
+        topic_info = channels_df.set_index('datetime').to_dict()
 
-        # group by datetime and take the average of delta_views and delta_subs
-        df = df.groupby('datetime').mean().reset_index()
-
-        # take a moving average of delta_views and delta_subs and subs
-        df['ratio_views'] = df['ratio_views'].rolling(window=10).mean()
-        df['ratio_subs'] = df['ratio_subs'].rolling(window=10).mean()
-        df['subs'] = df['subs'].rolling(window=10).mean()
-
-        # convert df to dictionary
-        df = df.set_index('datetime').to_dict()
-
-        return df
+        return topic_info
     
 
     def get_channels_product(self, product_name, release_date):
@@ -141,7 +139,6 @@ class DataExtractor():
         """
         df = self.video_data.copy()
         df = df[['channel_id', 'title', 'upload_date']]
-        df['title'] = df['title'].astype(str)
         df = df[df['title'].str.contains(product_name, case=False)]
         df['upload_date'] = pd.to_datetime(df['upload_date'])
         df = df[df['upload_date'] < datetime.datetime.strptime(release_date, '%d-%m-%Y')]
@@ -152,15 +149,3 @@ class DataExtractor():
 
         return channels
     
-
-    
-    
-
-    
-    
-    # once i get the channels that talked about a specific topic
-    # I need to split them into big, medium and small channels
-    # Then I need to keep only videos that were uploaded past the specific date
-    # Then I take the average of delta_views and delta_subs from that date upwards
-    # Then I take a moving average of that and plot it against time
-

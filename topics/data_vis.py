@@ -80,12 +80,13 @@ def plot_line(data_dict: dict, release: str, title: str):
     # Extracting dates and values from data_dict
     dates = list(data_dict.keys())
     values = list(data_dict.values())
+    print('these are the dates', dates)
 
-    # Convert release_date to datetime format
-    release= pd.to_datetime(release)
+    # Convert release_date to timestamp
+    release = datetime.strptime(release, '%d-%m-%Y')
 
     # Selecting a fraction of dates to display on the x-axis
-    tick_fraction = 10
+    tick_fraction = 20
     subset_dates = dates[::tick_fraction]
 
     # Creating a trace for the data line
@@ -97,7 +98,7 @@ def plot_line(data_dict: dict, release: str, title: str):
 
     # Creating the layout
     layout = go.Layout(title=title, xaxis=dict(title='Date', tickangle=45, tickmode='array', tickvals=subset_dates,
-                                               ticktext=[date.strftime('%Y-%m-%d') for date in subset_dates],
+                                               ticktext=[date for date in subset_dates],
                                                showgrid=False),
                        yaxis=dict(title='Values'), showlegend=True, hovermode='closest',
                        plot_bgcolor='rgba(240, 240, 240, 0.6)')
