@@ -1,4 +1,7 @@
-## The recipe for a successful tech-review channel
+# A recipe for a successful tech-review channel
+
+## Datastory 
+Uncover the secret to creating the perfect recipe for a successful tech-review channel on YouTube! Follow the link to our datastory and discover the ingredients for success: [Datastory](https://jakhongir0103.github.io/datastory/) 
 
 ## Abstract
 
