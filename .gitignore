@@ -1,6 +1,7 @@
-
 *.jsonl
 .DS_Store
 *.tsv
 *.gz
 *.pyc
+data/
+.ipynb_checkpoints/
