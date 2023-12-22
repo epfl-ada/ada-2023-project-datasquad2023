@@ -80,7 +80,6 @@ def plot_line(data_dict: dict, release: str, title: str):
     # Extracting dates and values from data_dict
     dates = list(data_dict.keys())
     values = list(data_dict.values())
-    print('these are the dates', dates)
 
     # Convert release_date to timestamp
     release = datetime.strptime(release, '%d-%m-%Y')
