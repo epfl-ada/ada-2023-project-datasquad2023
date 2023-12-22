@@ -64,7 +64,7 @@ In the section of the project, our aim is to study the titles of videos from tec
 │  
 ├── 01.12.2023 - Homework 2 deadline
 │    
-├── 05.12.2023 - Reformulating the research questions and diggining deeper into them 
+├── 05.12.2023 - Reformulating the research questions and digging deeper into them 
 │  
 ├── 12.12.2023 - Causal analysis on events + Develop draft for data story
 │  
