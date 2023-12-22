@@ -13,44 +13,59 @@ The research questions that we would like to answer fall into 3 main topics as f
 
 1. General characteristics of successful tech review channels<br>
 
-       1. What is the ideal video duration for maximizing engagement?
+       1. What is the optimum duration of a tech review video?
    
-       2. How often should you release new content to optimize channel growth?
+       2. What should the upload frequency of a youtuber be?
    
-       3. What impact does the type of reviewed product have on the growth of the channels??
+       3. How does the review product type influence the channels' growth?
       
-2. Optimizing Viewership Through Video Titles<br>
+2. Attracting viewers by title<br>
    
-       1. Can the sentiment in your video title affect its view count?
+       1. How should the overall sentiment of a video's title be?
    
-3. Making the Most out of Product Release Dates<br>
+3. Big tech product releases<br>
    
-       1. Do product launch events significantly impact YouTubers?
+       1. Does releasing a video about a newly released tech product influence the channels' growth?
    
-       2. What key topics should be addressed before, during, and after a product release?
+       2. What topics, of videos before and after the product release, accelarate the channels' growth?
   
    
 ## Methods
-### Step 1: General preprocessing
-For our analysis, preprocessing includes filtering the Tech Review channels. We are doing it based on what percentage of the channels' videos are about tech review. To classify the tech review videos, however, we are using multiple techniques. The naive method is about finding what percentage of the words used in their title is widely used by the well-known Tech Review YouTubers, and classifying the video depending on this. We also want to try with the Bayesian classifier (as explained in the notebook) and other NLP methods in the next milestone.
+### General preprocessing
+For our analysis, preprocessing includes filtering the Tech Review channels. We are doing it based on what percentage of the channels' videos are about tech review. To classify the tech review videos, the method is about finding what percentage of the words used in their title is widely used by the well-known Tech Review YouTubers, and classifying the video depending on this.
 
-### Step 2: Video length analysis
-We focused on a subset of videos (videos shorter than 20 minutes long) from the tech review channels (identified in the previous step). We first computed the average number of likes and dislikes per video, as well as the average duration of a video, over the years. Then, we computed the ratios $\frac{number\ of\ likes}{number\ of\ views}$ and $\frac{number\ of\ dislikes}{number\ of\ views}$ and calculated their pearson correlations with the average duration. The average duration had a statistically significant (small p-value) positive correlation with the ratio $\frac{number\ of\ likes}{number\ of\ views}$ but a statistically significant negative correaltion with the ratio $\frac{number\ of\ dislikes}{number\ of\ views}$. Moreover, we computed the moving average with a window size of 1000 and finally computed the ratio $\frac{number\ of\ likes}{number\ of\ dislikes}$ and plotted it across years. Note that we smoothed the number of views and dislikes by replacing zeros with ones, so that we avoid dividing by zero in our ratio computations while still taking into account those videos that performed poorly instead of discarding them. We run this analysis with videos that are larger than 20 minutes long and compare the results with the ones obtained for videos that are less than 20 minutes long.
+### 1.1
+We divided the tech videos into 2 subsets according to its duration: below 20 minute, and above 20 minute. For each groups, we then computed the correlation of the length of a video to multiple metrics, namely $\frac{number\ of\ likes}{number\ of\ views}$, $\frac{number\ of\ dislikes}{number\ of\ views}$, $\frac{number\ of\ likes}{number\ of\ dislikes}$, and $\frac{number\ of\ likes}{number\ of\ dislikes}$.
 
-### Step 3: Upload frequency analysis
-We first calculated the macro average of time delay (in days) between 2 consequtive videos per channel, and saw its change rate versus number of subscribers. Aftewards, we compared the number of videos per month with the delta subscribers, computing the correlation. We can further design a particular way of frequency : first putting number of days between video releases, and then putting $\frac{1}{number\ of\ days}$. We then can calculate the variance of this frequency (to check whether the upload is consistent or not).
+### 1.2
+Here we definde a monthly regularity of a channel as:
 
-### Step 4: Influence of big tech events on channel growth
-We analysed the reaction of viewers during the period of iPhone X, and saw the topics that are the most discussed in the videos about the iPhone X during these two periods.
-We can further continue it in the following method:
-We identifie the channels that talk about a release event to analyze their evolution in terms of the number of subscribers compared to those that do not talk about the event. First, we focus on 1 event (the release of the iPhone X). Then, we will generalize to 5 others. From the title and tags of the videos, we classify them according to the presence of the item "iphone x" in this metadata : treat if it talks about the release - control if not. We focus on videos that have an upload date from the release till one month later.
-Then, we classify the channels considering that if a channel has at least one video that talks about the release, then it is a treat channel. 
-We compare the growth of channels (measured in terms of the number of subscribers) for treat and control channels to see if channels that talk about a release have a higher growth than the ones that do not. To do this comparison, we use the time series data and focus on a period that goes from 15 days before the release till 15 days after.
-Then, we will do an observational study (causal analysis) with the outcome being the number of subscribers while identifying the potential confounders.
+$$
+\# \text{ videos} \cdot \log\left(1 + \frac{1}{\text{frequency}_{\text{std}}}\right)
+$$
 
-### Future methods
-### Step 5: Sentiment analysis
-In the section of the project, our aim is to study the titles of videos from tech YouTube channels to come up with well thought rules about not only subjects that could be discussed by a tech channel, but also how to write a title that would attract the most viewers. We answer the question of how should the overall sentiment of the title be (positive negative or neutral?).
+where ${\text{frequency} = \frac{1}{\text{delay}}}$, and _delay_ is number of days between publishing 2 consecutive videos.
+
+Then we find the correlation between the regularity and the growth of the channel, where the growth is defined as $\text{Channel's growth}$ as ${\frac{\text{\# monthly new subscribers}}{\text{\# total subscribers}}}$.
+
+### 1.3
+We first classify videos into one of the 7 types we are analysing (laptop, phone, camera, headphone, smart watch, tablet, desktop setup), depending on some predefined [keywords](data\product_keywords.json) that are relevant to these tech types. Then for each channel, we are calculating the percentage of each product type videos and aswer the following questions:
+- What range of product types should be covered?
+- What product categories have higher influence on the channels growth?
+- Which product categories attract more viewers?
+
+### 2
+In the section of the project, we calculated the overall sentiment of the titles using 2 methods ([textblob](https://textblob.readthedocs.io/en/dev/), [vaderSentiment](https://www.nltk.org/api/nltk.sentiment.vader.html)). Then we duscussed its relation to the videos success within the channels, i.e. # views of a video / # subs of a channel.
+
+### 3.1
+We analysed the reaction of viewers during multiple periods of the release date of multiple products. We first seperate the channels into 2 categories:
+- The ones that have published a video about a product we are analyzing at hand.
+- The ones that have NOT published a video about a product we are analyzing at hand.
+
+Then, we compare the trend of the channel's growth over a 1 year period (6 months before and after the release of the product) to see if there is a clear distinction between them.
+
+### 3.2
+Here, we saw the topics that are the most discussed during 3 periods around the release date of iPhone X: pre, during and post. Then we dove deeper into the analysis of those channels, that discussed the product during the pre release period, to see how it helped their growth.
 
 
 **Note: more implementation details/explanations can be found in the notebook.**
@@ -58,17 +73,13 @@ In the section of the project, our aim is to study the titles of videos from tec
 ## Executed timeline
 ```
 .
-|── 17.11.2023 - Milestone 2 deadline
-|
-├── 21.11.2023 - Continue exploring the dataset 
-│  
 ├── 01.12.2023 - Homework 2 deadline
 │    
 ├── 05.12.2023 - Reformulating the research questions and digging deeper into them 
 │  
-├── 12.12.2023 - Causal analysis on events + Develop draft for data story
+├── 12.12.2023 - Causal analysis on events
 │  
-├── 18.12.2023 - Sentiment analysis
+├── 18.12.2023 - Sentiment analysis + Develop draft for data story
 │  
 ├── 21.12.2023 - Finalize data story page design as well as the notebook
 │  
@@ -92,23 +103,23 @@ In the section of the project, our aim is to study the titles of videos from tec
 <tbody>
   <tr>
     <td class="tg-0lax">@Salma</td>
-    <td class="tg-0lax">(Step 4) Work more on question 3.1, by generalizing to other events, and do the causal analysis.<br><br>(Step 4) Do 3.2.<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">Work more on question 3.1, by generalizing to other events, and do the causal analysis.<br><br>Data story</td>
   </tr>
   <tr>
     <td class="tg-0lax">@Jakhongir</td>
-    <td class="tg-0lax">(Step 1) Implement preprocessing with more advanced classification<br><br>(Step 5) Work on the sentiment analysis part.<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">Implement preprocessing<br><br>Work on question 1.3.<br><br>Data story + website</td>
   </tr>
   <tr>
     <td class="tg-0lax">@Zied</td>
-    <td class="tg-0lax">(Step 5) Work on the sentiment analysis topic (Do 2.1)<br><br>(Step2) Continue exploring the dataset.<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">Work on the sentiment analysis topic (2.1)<br><br>Work on question 1.1.<br><br>Data story</td>
   </tr>
   <tr>
     <td class="tg-0lax">@Ali</td>
-    <td class="tg-0lax">(Step 5) Work on the sentiment analysis part.<br><br> (Step 4) Do a more in depth and generalised analysis on the effect of product launch announcement on the YouTube platform and how we can leverage them to increase user interaction<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">Work on the sentiment analysis topic (2.1)<br><br>Work on question 3.1.<br><br>Data story</td>
   </tr>
   <tr>
     <td class="tg-0lax">@Othmane</td>
-    <td class="tg-0lax">(Step 3) Work on the upload frequency: objective is to generalise the study to all youtubers instead of 4<br><br>(Step 3) Run a causal study on the upload frequency: split youtubers into different chunks as it has been done in the beginning of the frequency analysis<br><br>Help in writing the report/data story + website (presentation of data story)</td>
+    <td class="tg-0lax">Work on the upload frequency (1.2)<br><br>Data story</td>
   </tr>
 </tbody>
 </table>
