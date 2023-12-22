@@ -1,0 +1,4 @@
+yt_tech_channels_metadata.tsv.gz -> 'yt_metadata' of all the videos (both tech and non-tech) of the tech review channels.
+tech_review_channels.tsv.gz -> 'channels data' of tech review channels.
+yt_tech_review.tsv.gz -> yt_metadata with ['channel_id','display_id','duration','tags','title','clean_title','clean_tag'] to try with other preprocessing methods.
+yt_tech_edu_metadata_en.tsv.gz -> raw 'yt_metadata' with the only the video of categories 'Education' and 'Science & Technology'
