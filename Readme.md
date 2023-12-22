@@ -41,12 +41,12 @@ We divided the tech videos into 2 subsets according to its duration: below 20 mi
 Here we definde a monthly regularity of a channel as:
 
 $$
-\# \text{ videos} \cdot \log\left(1 + \frac{1}{\text{frequency}_{\text{std}}}\right)
+\text{number of videos} \cdot \log\left(1 + \frac{1}{\text{frequency}_{\text{std}}}\right)
 $$
 
 where ${\text{frequency} = \frac{1}{\text{delay}}}$, and _delay_ is number of days between publishing 2 consecutive videos.
 
-Then we find the correlation between the regularity and the growth of the channel, where the growth is defined as $\text{Channel's growth}$ as ${\frac{\text{\# monthly new subscribers}}{\text{\# total subscribers}}}$.
+Then we find the correlation between the regularity and the growth of the channel, where the growth is defined as $\text{Channel's growth}$ as ${\frac{\text{number of monthly new subscribers}}{\text{number of total subscribers}}}$.
 
 ### 1.3
 We first classify videos into one of the 7 types we are analysing (laptop, phone, camera, headphone, smart watch, tablet, desktop setup), depending on some predefined [keywords](data\product_keywords.json) that are relevant to these tech types. Then for each channel, we are calculating the percentage of each product type videos and aswer the following questions:
