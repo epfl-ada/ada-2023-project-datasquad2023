@@ -13,27 +13,21 @@ The research questions that we would like to answer fall into 3 main topics as f
 
 1. General characteristics of successful tech review channels<br>
 
-       1. Relationship between the length of a video and its success (how did it change over the years)?
+       1. What is the ideal video duration for maximizing engagement?
    
-       2. What should the upload frequency be?
+       2. How often should you release new content to optimize channel growth?
    
-       3. What is the right range of products to review (broad and narrow/niche product ranges)?
-   
-       4. Which tech review categories are the most popular (smartphone, laptop, …)?
+       3. What impact does the type of reviewed product have on the growth of the channels??
       
-2. Sentiment analysis<br>
+2. Optimizing Viewership Through Video Titles<br>
    
-       1. What should be the overall length.
+       1. Can the sentiment in your video title affect its view count?
    
-       2. How should be the overall sentiment of the title.
+3. Making the Most out of Product Release Dates<br>
    
-3. Influence of big tech events (release) on channels' growth?<br>
+       1. Do product launch events significantly impact YouTubers?
    
-       1. How do big tech events affect the existing channels growth?
-   
-       2. How quickly can the new channels (that start with the first video about the “big” event) grow?
-   
-       3. What is the best time for releasing a review video after a tech product launch event?
+       2. What key topics should be addressed before, during, and after a product release?
   
    
 ## Methods
@@ -41,7 +35,7 @@ The research questions that we would like to answer fall into 3 main topics as f
 For our analysis, preprocessing includes filtering the Tech Review channels. We are doing it based on what percentage of the channels' videos are about tech review. To classify the tech review videos, however, we are using multiple techniques. The naive method is about finding what percentage of the words used in their title is widely used by the well-known Tech Review YouTubers, and classifying the video depending on this. We also want to try with the Bayesian classifier (as explained in the notebook) and other NLP methods in the next milestone.
 
 ### Step 2: Video length analysis
-We focused on a subset of videos (videos shorter than 20 minutes long) from the tech review channels (identified in the previous step). We first computed the average number of likes and dislikes per video, as well as the average duration of a video, over the years. Then, we computed the ratios $\frac{number\ of\ likes}{number\ of\ views}$ and $\frac{number\ of\ dislikes}{number\ of\ views}$ and calculated their pearson correlations with the average duration. The average duration had a statistically significant (small p-value) positive correlation with the ratio $\frac{number\ of\ likes}{number\ of\ views}$ but a statistically significant negative correaltion with the ratio $\frac{number\ of\ dislikes}{number\ of\ views}$. Moreover, we computed the moving average with a window size of 1000 and finally computed the ratio $\frac{number\ of\ likes}{number\ of\ dislikes}$ and plotted it across years. Note that we smoothed the number of views and dislikes by adding one to each of them, so that we avoid dividing by zero in our ratio computations while still taking into account those videos that performed poorly instead of discarding them. We would like to run this analysis with videos that are larger than 20 minutes long and see whether we get oppsoite results to what we got with videos less than 20 minutes long.
+We focused on a subset of videos (videos shorter than 20 minutes long) from the tech review channels (identified in the previous step). We first computed the average number of likes and dislikes per video, as well as the average duration of a video, over the years. Then, we computed the ratios $\frac{number\ of\ likes}{number\ of\ views}$ and $\frac{number\ of\ dislikes}{number\ of\ views}$ and calculated their pearson correlations with the average duration. The average duration had a statistically significant (small p-value) positive correlation with the ratio $\frac{number\ of\ likes}{number\ of\ views}$ but a statistically significant negative correaltion with the ratio $\frac{number\ of\ dislikes}{number\ of\ views}$. Moreover, we computed the moving average with a window size of 1000 and finally computed the ratio $\frac{number\ of\ likes}{number\ of\ dislikes}$ and plotted it across years. Note that we smoothed the number of views and dislikes by replacing zeros with ones, so that we avoid dividing by zero in our ratio computations while still taking into account those videos that performed poorly instead of discarding them. We run this analysis with videos that are larger than 20 minutes long and compare the results with the ones obtained for videos that are less than 20 minutes long.
 
 ### Step 3: Upload frequency analysis
 We first calculated the macro average of time delay (in days) between 2 consequtive videos per channel, and saw its change rate versus number of subscribers. Aftewards, we compared the number of videos per month with the delta subscribers, computing the correlation. We can further design a particular way of frequency : first putting number of days between video releases, and then putting $\frac{1}{number\ of\ days}$. We then can calculate the variance of this frequency (to check whether the upload is consistent or not).
@@ -56,13 +50,12 @@ Then, we will do an observational study (causal analysis) with the outcome being
 
 ### Future methods
 ### Step 5: Sentiment analysis
-In the section of the project, our aim is to study the titles of videos from tech YouTube channels to come up with well thought rules about not only subjects that could be discussed by a tech channel, but also how to write a title that would attract the most viewers.
-For instance, we would answer questions such as how should be the overall sentiment of the title, what should be the overall length, ...
+In the section of the project, our aim is to study the titles of videos from tech YouTube channels to come up with well thought rules about not only subjects that could be discussed by a tech channel, but also how to write a title that would attract the most viewers. We answer the question of how should the overall sentiment of the title be (positive negative or neutral?).
 
 
 **Note: more implementation details/explanations can be found in the notebook.**
 
-## Proposed timeline
+## Executed timeline
 ```
 .
 |── 17.11.2023 - Milestone 2 deadline
@@ -71,13 +64,13 @@ For instance, we would answer questions such as how should be the overall sentim
 │  
 ├── 01.12.2023 - Homework 2 deadline
 │    
-├── 05.12.2023 - Non-naive preprocessing (classification)
+├── 05.12.2023 - Reformulating the research questions and diggining deeper into them 
 │  
 ├── 12.12.2023 - Causal analysis on events + Develop draft for data story
 │  
 ├── 18.12.2023 - Sentiment analysis
 │  
-├── 21.12.2023 - Finalize data story page design
+├── 21.12.2023 - Finalize data story page design as well as the notebook
 │  
 ├── 22.12.2023 - Milestone 3 deadline
 .
