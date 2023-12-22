@@ -3,5 +3,4 @@
 *.tsv
 *.gz
 *.pyc
-data/
 .ipynb_checkpoints/
